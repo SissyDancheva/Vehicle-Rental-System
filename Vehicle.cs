@@ -4,16 +4,25 @@ namespace Vehicle_Rental_System
 {
     internal class Vehicle
     {
-        public string brand { get; set; }
-        public string model {  get; set; }
-        public decimal value { get; set; }
+        public string Brand { get; set; }
+        public string Model {  get; set; }
+        public decimal Value { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         // constructor
-        public Vehicle(string brand, string model,decimal value)
+        public Vehicle(string Brand, string Model,decimal Value, DateTime StartDate, DateTime EndDate)
         {
-            this.brand = brand;
-            this.model = model;
-            this.value = value;
+            this.Brand = Brand;
+            this.Model = Model;
+            this.Value = Value;
+            this.StartDate = StartDate;
+            this.EndDate = EndDate;
+        }
+
+        public int RentalPeriod()
+        {
+            return (EndDate - StartDate).Days;
         }
     }
 }

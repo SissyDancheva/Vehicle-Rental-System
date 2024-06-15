@@ -8,12 +8,12 @@ namespace Vehicle_Rental_System
 {
     internal class Car : Vehicle
     {
-        public int safetyRating {  get; set; }
+        public int SafetyRating {  get; set; }
         // safety must be between 1-5 and 4,5 are considered high safetyRating
 
-        public Car(string brand,string model,decimal value, int safetyRating) : base(brand, model, value)
+        public Car(string Brand,string Model,decimal Value,DateTime StartDate, DateTime EndDate, int SafetyRating) : base(Brand, Model, Value, StartDate, EndDate)
         {
-            this.safetyRating = safetyRating;
+            this.SafetyRating = SafetyRating;
         }
         
     }

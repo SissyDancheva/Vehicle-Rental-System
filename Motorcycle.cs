@@ -8,10 +8,10 @@ namespace Vehicle_Rental_System
 {
     internal class Motorcycle : Vehicle
     {
-        public int riderAge {  get; set; }
-        public Motorcycle(string brand,string model,decimal value, int riderAge) : base(brand, model, value)
+        public int RiderAge {  get; set; }
+        public Motorcycle(string Brand,string Model,decimal Value, DateTime StartDate, DateTime EndDate, int RiderAge) : base(Brand, Model, Value, StartDate, EndDate)
         {
-            this.riderAge = riderAge;
+            this.RiderAge = RiderAge;
         }
 
     }

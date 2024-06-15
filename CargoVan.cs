@@ -8,10 +8,10 @@ namespace Vehicle_Rental_System
 {
     internal class CargoVan : Vehicle
     {
-        public int driverExperience {  get; set; } 
-        public CargoVan(string brand, string model,decimal value,int driverExperience) : base(brand, model, value)
+        public int DriverExperience {  get; set; } 
+        public CargoVan(string Brand, string Model, decimal Value, DateTime StartDate, DateTime EndDate, int DriverExperience) : base(Brand, Model, Value, StartDate, EndDate)
         {
-            this.driverExperience = driverExperience;
+            this.DriverExperience = DriverExperience;
         }
     }
 }
