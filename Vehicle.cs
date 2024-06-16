@@ -39,6 +39,17 @@ namespace Vehicle_Rental_System
             }
             return ReservationPeriod();
         }
+
+        public decimal RemainingDays()
+        {
+            return (EndDate - ReturnDate).Days;
+        }
+
+        public decimal EarlyReturnDiscountForRent()
+        {
+            return (RemainingDays() * GetDailyRentalCost()) / 2;
+        }
+
         decimal GetTotalRentCost()
         {
             return GetDailyRentalCost() * ReservationPeriod();
