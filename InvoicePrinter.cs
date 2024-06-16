@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vehicle_Rental_System
 {
@@ -27,6 +23,7 @@ namespace Vehicle_Rental_System
             return "";
         }
 
+
         public static void DisplayInvoice(Invoice invoice)
         {
             Console.WriteLine(ShowVehicleInfo(invoice));
@@ -48,7 +45,7 @@ namespace Vehicle_Rental_System
             Console.WriteLine($"Insurance discount per day: ${invoice.GetDailyInsuranceDiscount()}");
             Console.WriteLine($"Insurance per day: ${Math.Round(invoice.Vehicle.AdjustDailyInsuranceCost(), 2)}");
             Console.WriteLine();
-            if (invoice.IsEarlyReturn())
+            if (invoice.IsEarlyReturned())
             {
                 Console.WriteLine($"Early return discount for rent: ${Math.Round(invoice.EarlyReturnDiscountForRent(), 2)}");
                 Console.WriteLine($"Early return discount for insurance: ${invoice.GetEarlyReturnInsuranceDiscount()}");

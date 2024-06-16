@@ -15,7 +15,7 @@ namespace Vehicle_Rental_System
         }
 
         // checks if the vehicle is returned earlier to show additional messages
-        public bool IsEarlyReturn()
+        public bool IsEarlyReturned()
         {
             return Vehicle.ReturnDate < Vehicle.EndDate;
         }
@@ -34,7 +34,6 @@ namespace Vehicle_Rental_System
         {
             return Math.Round(RemainingDays() * Vehicle.AdjustDailyInsuranceCost(), 2);
         }
-
 
         public decimal RemainingDays()
         {
