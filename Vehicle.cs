@@ -24,5 +24,23 @@ namespace Vehicle_Rental_System
         {
             return (EndDate - StartDate).Days;
         }
+        // virtual methods so it's possible to override them in the derived classes
+        #region Virtuals
+
+        public virtual decimal GetDailyRentalCost()
+        {
+            return Value / ActualRentalPeriod();
+        }
+
+        public virtual decimal DailyInsuranceCost()
+        {
+            return 0m;
+        }
+
+        public virtual decimal AdjustDailyInsuranceCost()
+        {
+            return 0m;
+        }
+        #endregion
     }
 }
