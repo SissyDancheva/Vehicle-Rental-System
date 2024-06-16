@@ -15,7 +15,7 @@ C# Console Application that calculates rental and insurance costs based on speci
       <ul>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#output">Output</a></li>
-        <li><a href="#structure">Structure</a></li>
+        <li><a href="#structure-of-the-project">Structure</a></li>
       </ul>
     </li>
   </ol>
