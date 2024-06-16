@@ -14,74 +14,69 @@ namespace Vehicle_Rental_System
             Vehicle = vehicle;
         }
 
-        decimal GetTotalPrice()
-        {
-            return Math.Round(Vehicle.GetTotalRentalCosts() + Vehicle.GetElapsedDaysInsurance(), 2);
-        }
-        decimal GetDailyInsuranceDiscount()
-        {
-            return Math.Round(Vehicle.DailyInsuranceCost() - Vehicle.AdjustDailyInsuranceCost(), 2);
-        }
-        decimal GetEarlyReturnInsuranceDiscount()
-        {
-            return Math.Round(Vehicle.RemainingDays() * Vehicle.AdjustDailyInsuranceCost(), 2);
-        }
-
-        bool IsEarlyReturn()
+        // checks if the vehicle is returned earlier to show additional messages
+        public bool IsEarlyReturn()
         {
             return Vehicle.ReturnDate < Vehicle.EndDate;
         }
-        string ShowVehicleInfo()
-        { 
-            if (Vehicle is Car car)
-            {
-                return $"\nA car that is valued at ${car.Value:N2}, and has a security rating of {car.SafetyRating}:\n";
-            } 
-            if (Vehicle is Motorcycle moto)
-            {
-                return $"\nA motorcycle that is valued at ${moto.Value:N2}, and the driver is {moto.RiderAge} years old\n";
 
-            }
-            if (Vehicle is CargoVan van)
-            {
-                return $"\nA motorcycle that is valued at ${van.Value:N2}, and the driver has {van.DriverExperience} years of driving experience\n";
-
-            }
-            return "";
+        public decimal GetTotalPrice()
+        {
+            return Math.Round(GetTotalRentalCosts() + GetElapsedDaysInsurance(), 2);
         }
 
-        public void DisplayInvoice()
+        public decimal GetDailyInsuranceDiscount()
         {
-            Console.WriteLine(ShowVehicleInfo());
+            return Math.Round(Vehicle.DailyInsuranceCost() - Vehicle.AdjustDailyInsuranceCost(), 2);
+        }
 
-            Console.WriteLine("XXXXXXXXXX");
-            Console.WriteLine($"Date: {Vehicle.ReturnDate:yyyy-MM-dd}");
-            Console.WriteLine($"Customer Name: {Vehicle.CustomerName}");
-            Console.WriteLine($"Rented Vehicle: {Vehicle.Brand} {Vehicle.Model}");
-            Console.WriteLine();
-            Console.WriteLine($"Reservation start date: {Vehicle.StartDate:yyyy-MM-dd}");
-            Console.WriteLine($"Reservation start date: {Vehicle.EndDate:yyyy-MM-dd}");
-            Console.WriteLine($"Reserved rental days: {Vehicle.ReservationPeriod()} days");
-            Console.WriteLine();
-            Console.WriteLine($"Actual return date: {Vehicle.ReturnDate:yyyy-MM-dd}");
-            Console.WriteLine($"Actual rental days: {Vehicle.ActualRentalPeriod()} days");
-            Console.WriteLine();
-            Console.WriteLine($"Rental cost per day: ${Math.Round(Vehicle.GetDailyRentalCost(), 2)}");
-            Console.WriteLine($"Initial insurance per day: ${Math.Round(Vehicle.DailyInsuranceCost(), 2)}");
-            Console.WriteLine($"Insurance discount per day: ${GetDailyInsuranceDiscount()}");
-            Console.WriteLine($"Insurance per day: ${Math.Round(Vehicle.AdjustDailyInsuranceCost(), 2)}");
-            Console.WriteLine();
-            if (IsEarlyReturn())
+        public decimal GetEarlyReturnInsuranceDiscount()
+        {
+            return Math.Round(RemainingDays() * Vehicle.AdjustDailyInsuranceCost(), 2);
+        }
+
+
+        public decimal RemainingDays()
+        {
+            return (Vehicle.EndDate - Vehicle.ReturnDate).Days;
+        }
+
+        public decimal EarlyReturnDiscountForRent()
+        {
+            return (RemainingDays() * Vehicle.GetDailyRentalCost()) / 2;
+        }
+
+        decimal GetTotalRentCost()
+        {
+            return Vehicle.GetDailyRentalCost() * Vehicle.ReservationPeriod();
+        }
+
+        public decimal GetElapsedDaysInsurance()
+        {
+            // insurance is full price for elapsed days and NOT paid for the remaining days
+            return Vehicle.AdjustDailyInsuranceCost() * Vehicle.ActualRentalPeriod();
+        }
+
+        public decimal GetTotalRentalCosts()
+        {
+            // full cost for the elapsed days and half for the rest, if returned ahead of time
+            if (Vehicle.ActualRentalPeriod() < Vehicle.ReservationPeriod())
             {
-                Console.WriteLine($"Early return discount for rent: ${Math.Round(Vehicle.EarlyReturnDiscountForRent(), 2)}");
-                Console.WriteLine($"Early return discount for insurance: ${GetEarlyReturnInsuranceDiscount()}");
-                Console.WriteLine();
-            }            
-            Console.WriteLine($"Total rent: ${Math.Round(Vehicle.GetTotalRentalCosts(), 2)}");
-            Console.WriteLine($"Total insurance: ${Math.Round(Vehicle.GetElapsedDaysInsurance(), 2)}");
-            Console.WriteLine($"Total: ${GetTotalPrice()}");
-            Console.WriteLine("XXXXXXXXXX");
+                // find how many days are left until the end date and apply discount
+                EarlyReturnDiscountForRent();
+                return GetTotalRentCost() - EarlyReturnDiscountForRent();
 
+            }
+
+            // calc full cost for the elapsed days
+            return GetTotalRentCost();
+        }
+
+
+        public void PrintInvoice()
+        {
+            InvoicePrinter printer = new ();
+            InvoicePrinter.DisplayInvoice(this);
         }
     }
 }

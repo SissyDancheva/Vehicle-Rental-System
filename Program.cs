@@ -24,9 +24,10 @@ namespace Vehicle_Rental_System
             Invoice MotorcycleInvoice = new (motorcycle);
             Invoice CargoVanInvoice = new (cargoVan);
 
-            CarInvoice.DisplayInvoice();
-            MotorcycleInvoice.DisplayInvoice();
-            CargoVanInvoice.DisplayInvoice();
+            CarInvoice.PrintInvoice();
+            MotorcycleInvoice.PrintInvoice();
+            CargoVanInvoice.PrintInvoice();
+
 
             Console.ReadLine();
         }

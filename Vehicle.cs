@@ -4,6 +4,7 @@ namespace Vehicle_Rental_System
 {
     internal class Vehicle
     {
+        
         public string CustomerName { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -24,6 +25,7 @@ namespace Vehicle_Rental_System
             this.ReturnDate = ReturnDate;
         }
 
+
         public int ReservationPeriod()
         {
             return (EndDate - StartDate).Days;
@@ -40,48 +42,12 @@ namespace Vehicle_Rental_System
             return ReservationPeriod();
         }
 
-        public decimal RemainingDays()
-        {
-            return (EndDate - ReturnDate).Days;
-        }
-
-        public decimal EarlyReturnDiscountForRent()
-        {
-            return (RemainingDays() * GetDailyRentalCost()) / 2;
-        }
-
-        decimal GetTotalRentCost()
-        {
-            return GetDailyRentalCost() * ReservationPeriod();
-        }
-
-        public decimal GetElapsedDaysInsurance()
-        {
-            // insurance is full price for elapsed days and NOT paid for the remaining days
-            return AdjustDailyInsuranceCost() * ActualRentalPeriod();
-        }
-
-        public decimal GetTotalRentalCosts()
-        {
-            // full cost for the elapsed days and half for the rest, if returned ahead of time
-            if (ActualRentalPeriod() < ReservationPeriod())
-            {
-                // find how many days are left until the end date and apply discount
-                EarlyReturnDiscountForRent();
-                return GetTotalRentCost() - EarlyReturnDiscountForRent();
-
-            }
-
-            // calc full cost for the elapsed days
-            return GetTotalRentCost();
-        }
-
         // virtual methods so it's possible to override them in the derived classes
         #region Virtuals
 
         public virtual decimal GetDailyRentalCost()
         {
-            return Value / ActualRentalPeriod();
+            return 0m;
         }
 
         public virtual decimal DailyInsuranceCost()
