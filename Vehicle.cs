@@ -28,6 +28,17 @@ namespace Vehicle_Rental_System
         {
             return (EndDate - StartDate).Days;
         }
+
+        public int ActualRentalPeriod()
+        {
+            // if returned ahead of time, rental period is reduced, else it's the ReservationPeriod
+            // e.g. if it's rented for 10days and returned on the 5th, RentalPeriod = 5
+            if (ReturnDate < EndDate)
+            {
+                return (ReturnDate - StartDate).Days;
+            }
+            return ReservationPeriod();
+        }
         // virtual methods so it's possible to override them in the derived classes
         #region Virtuals
 
