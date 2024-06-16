@@ -24,7 +24,7 @@ namespace Vehicle_Rental_System
             this.ReturnDate = ReturnDate;
         }
 
-        public int RentalPeriod()
+        public int ReservationPeriod()
         {
             return (EndDate - StartDate).Days;
         }
