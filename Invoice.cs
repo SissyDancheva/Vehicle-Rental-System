@@ -8,6 +8,12 @@ namespace Vehicle_Rental_System
 {
     internal class Invoice
     {
+        public Vehicle Vehicle { get; set; }
+        public Invoice(Vehicle vehicle)
+        {
+            Vehicle = vehicle;
+        }
+
         decimal GetTotalPrice()
         {
             return Math.Round(Vehicle.GetTotalRentalCosts() + Vehicle.GetElapsedDaysInsurance(), 2);
@@ -42,6 +48,40 @@ namespace Vehicle_Rental_System
 
             }
             return "";
+        }
+
+        public void DisplayInvoice()
+        {
+            Console.WriteLine(ShowVehicleInfo());
+
+            Console.WriteLine("XXXXXXXXXX");
+            Console.WriteLine($"Date: {Vehicle.ReturnDate:yyyy-MM-dd}");
+            Console.WriteLine($"Customer Name: {Vehicle.CustomerName}");
+            Console.WriteLine($"Rented Vehicle: {Vehicle.Brand} {Vehicle.Model}");
+            Console.WriteLine();
+            Console.WriteLine($"Reservation start date: {Vehicle.StartDate:yyyy-MM-dd}");
+            Console.WriteLine($"Reservation start date: {Vehicle.EndDate:yyyy-MM-dd}");
+            Console.WriteLine($"Reserved rental days: {Vehicle.ReservationPeriod()} days");
+            Console.WriteLine();
+            Console.WriteLine($"Actual return date: {Vehicle.ReturnDate:yyyy-MM-dd}");
+            Console.WriteLine($"Actual rental days: {Vehicle.ActualRentalPeriod()} days");
+            Console.WriteLine();
+            Console.WriteLine($"Rental cost per day: ${Math.Round(Vehicle.GetDailyRentalCost(), 2)}");
+            Console.WriteLine($"Initial insurance per day: ${Math.Round(Vehicle.DailyInsuranceCost(), 2)}");
+            Console.WriteLine($"Insurance discount per day: ${GetDailyInsuranceDiscount()}");
+            Console.WriteLine($"Insurance per day: ${Math.Round(Vehicle.AdjustDailyInsuranceCost(), 2)}");
+            Console.WriteLine();
+            if (IsEarlyReturn())
+            {
+                Console.WriteLine($"Early return discount for rent: ${Math.Round(Vehicle.EarlyReturnDiscountForRent(), 2)}");
+                Console.WriteLine($"Early return discount for insurance: ${GetEarlyReturnInsuranceDiscount()}");
+                Console.WriteLine();
+            }            
+            Console.WriteLine($"Total rent: ${Math.Round(Vehicle.GetTotalRentalCosts(), 2)}");
+            Console.WriteLine($"Total insurance: ${Math.Round(Vehicle.GetElapsedDaysInsurance(), 2)}");
+            Console.WriteLine($"Total: ${GetTotalPrice()}");
+            Console.WriteLine("XXXXXXXXXX");
+
         }
     }
 }
