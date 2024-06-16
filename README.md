@@ -25,13 +25,15 @@ C# Console Application that calculates rental and insurance costs based on speci
 
 C# Console Application that manages rental and return processes of different types of vehicles. Currently it works for Cars, Motorcycles and Cargo Vans. The user is not required to enter input, because the input values are part of the code. They can be found in the Main method in <strong>Program.cs</strong>
 
-### Built with
-
--  C#
 
 ## Getting Started
 
 Currently the application runs locally so you need to download it on your computer or simply clone the repository.
+
+
+### Built with
+
+-  C#
 
 
 ## Output
