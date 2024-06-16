@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vehicle_Rental_System
 {
@@ -11,10 +7,9 @@ namespace Vehicle_Rental_System
         public int SafetyRating {  get; set; }
         // safety must be between 1-5 and 4,5 are considered high safetyRating
 
-        public Car(string Brand,string Model,decimal Value,DateTime StartDate, DateTime EndDate, int SafetyRating) : base(Brand, Model, Value, StartDate, EndDate)
+        public Car(string CustomerName, string Brand,string Model,decimal Value,DateTime StartDate, DateTime EndDate, DateTime ReturnDate, int SafetyRating) : base(CustomerName, Brand, Model, Value, StartDate, EndDate, ReturnDate)
         {
             this.SafetyRating = SafetyRating;
         }
-        
     }
 }

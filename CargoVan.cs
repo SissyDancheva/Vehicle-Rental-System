@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vehicle_Rental_System
 {
     internal class CargoVan : Vehicle
     {
-        public int DriverExperience {  get; set; } 
-        public CargoVan(string Brand, string Model, decimal Value, DateTime StartDate, DateTime EndDate, int DriverExperience) : base(Brand, Model, Value, StartDate, EndDate)
+        public int DriverExperience {  get; set; }
+        public CargoVan(string CustomerName, string Brand, string Model, decimal Value, DateTime StartDate, DateTime EndDate, DateTime ReturnDate, int DriverExperience) : base(CustomerName, Brand, Model, Value, StartDate, EndDate, ReturnDate)
         {
-            this.DriverExperience = DriverExperience;
+            this.DriverExperience = DriverExperience;           
+        }
         }
     }
 }
